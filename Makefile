@@ -74,7 +74,7 @@ distclean: clean
 #
 archive:  all clean
 	COPYFILE_DISABLE=1  \
-	tar -C .. -czvf ../$(PACKAGE).tgz --exclude '*~' --exclude arsenal-fonts \
+	tar -C .. -czvf ../$(PACKAGE).tgz --exclude '*~' --exclude lora-fonts \
 	--exclude '*.tgz' --exclude '*.zip'  --exclude ".git*" $(PACKAGE)
 	mv ../$(PACKAGE).tgz .
 
@@ -83,5 +83,6 @@ zip:  all clean
 	make $(PACKAGE).sty
 	$(RM) $(PACKAGE).log
 	cd ..;\
-	zip -r  $(PACKAGE).zip $(PACKAGE) -x "*.ins" -x "*.gitignore"
+	zip -r  $(PACKAGE).zip $(PACKAGE) -x "*.ins" -x "*.gitignore" \
+	-x "$(PACKAGE)/lora-fonts/*"
 
