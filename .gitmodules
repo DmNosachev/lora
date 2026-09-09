@@ -1,0 +1,3 @@
+[submodule "lora-fonts"]
+	path = lora-fonts
+	url = https://github.com/cyrealtype/Lora-Cyrillic

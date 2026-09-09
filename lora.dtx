@@ -1,0 +1,296 @@
+% \iffalse meta-comment
+%
+% File: lora.dtx
+% Copyright 2026 by Dmitriy Nosachev
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    https://www.latex-project.org/lppl.txt
+%
+%<*driver>
+\documentclass{l3doc}
+\usepackage{lora}
+\usepackage[style=numeric, backend=biber]{biblatex}
+\addbibresource{lora.bib}
+\usepackage{metalogo}
+\usepackage[dvipsnames]{xcolor}
+\hypersetup{
+  linkcolor=MidnightBlue,
+  citecolor=OliveGreen,
+  urlcolor=NavyBlue,
+  filecolor=Magenta
+}
+\begin{document}
+  \RecordChanges
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+% \GetFileInfo{lora.sty}
+% \title{\pkg{lora}---\LaTeX{} support of Lora font\\ by Olga Karpushina and Alexei Vanyashin}
+% \date{\fileversion, \filedate}
+% \author{Dmitriy Nosachev\thanks{\href{mailto:quartz64@gmail.com}{quartz64@gmail.com}}}
+% \maketitle
+% \begin{abstract}
+%   Lora is a well-balanced contemporary serif typeface with roots in calligraphy, featuring brushed curves and driving wedge serifs.
+%   This package provides \LaTeX{} support for it.
+% \end{abstract}
+% \tableofcontents
+% \begin{documentation}
+%
+%\section{User manual}
+%\label{sec:ug}
+%
+% 
+%\subsection{Introduction}
+%\label{sec:ug-intro}
+%
+% Lora is a contemporary serif typeface with a balanced design and
+% calligraphic origins. This Unicode font family accommodates
+% languages using the Latin and Cyrillic scripts (including their
+% variants) and has the potential to be extended to support additional
+% writing systems.
+%
+% Lora was created by Olga Karpushina and Alexei Vanyashin at Cyreal
+% and launched in 2011 with contributions and assistance from
+% Gayaneh Bagdasaryan. Font is licensed under the SIL Open Font
+% License, Version 1.1.~\cite{cyreal}
+%
+% This package provides \LaTeX{} interface for the font.
+% Since the font it in OTF format, you do need a Unicode
+% engine like \XeTeX{} or \LuaTeX{} to use it.  
+%
+% I would like to express my deep gratitude to Boris Veytsman,
+% the author of the \texttt{arsenal} package~\cite{arsenal}. I used his \texttt{.dtx}
+% file (Documented LaTeX Source) as a template.
+%
+%\subsection{Package options}
+%\label{sec:ug-options}
+%
+% \begin{variable}{default, scale, Scale}
+%
+% The following options are recognized:
+%   \begin{description}
+%   \item[default] whether to make Lora the main font of the
+%     document, either |true| (the default) or |false|.
+%   \item[scale] the scale for the font, by default 1.0.  The option
+%   |Scale| is a synonym.
+%   \end{description}
+% \end{variable}
+%
+%
+%\subsection{Font features}
+%\label{sec:ug-families}
+%
+% \begin{function}{\lorafamily, \textlora}
+%   \begin{syntax}
+%     \cs{lorafamily} \meta{text}
+%     \cs{textlora}\Arg{text}
+%   \end{syntax}
+%   The font provides the commands \cs{lorafamily} and
+%   \cs{textlora} for selecting the font.  Alternatively, the NFSS
+%   commands \cs{fontfamily}|{lora}|\cs{selectfont} can be used to
+%   select Lora family.
+% \end{function}
+%
+% The font has normal and \textit{italic} shapes, as well as bolded
+% \textbf{bold} and \textbf{\itshape bold italic}. They are selected
+% by the standard \LaTeX{} commands. 
+% 
+% This font supports variable weight with values from 400 to 700.
+% The regular weight corresponds to 400, and the bold corresponds to 700.
+% Additionally, the package provides commands for medium weight (500)
+% and semi-bold (600).
+% 
+% \begin{function}{\LoraMedium, \textloramed}
+%   \begin{syntax}
+%     \cs{LoraMedium} \meta{text}
+%     \cs{textloramed}\Arg{text}
+%   \end{syntax}
+%   The font provides the commands \cs{LoraMedium} and
+%   \cs{textloramed} for selecting the \textloramed{medium weight} variant.
+% \end{function}
+% 
+% \begin{function}{\LoraSemiBold, \textlorasb}
+%   \begin{syntax}
+%     \cs{LoraSemiBold} \meta{text}
+%     \cs{textlorasb}\Arg{text}
+%   \end{syntax}
+%   The font provides the commands \cs{LoraSemiBold} and
+%   \cs{textlorasb} for selecting the \textlorasb{semi-bold} variant.
+% \end{function}
+%
+%\subsection{Special symbols in text}
+%\label{sec:chars}
+%
+% \begin{function}{
+%   \texthryvnia,
+%   \texttugrik,
+%   \texttenge,
+%   \textlira,
+%   \textruble
+% }
+% The font has common currency characters, like \cs{textdollar}
+% (\textdollar), \cs{textyen} (\textyen), \cs{textsterling}
+% (\textsterling), \cs{texteuro} (\texteuro).  It also defines several
+% less common currency characters:
+%   \cs{texthryvnia} (\texthryvnia),
+%   \cs{texttugrik} (\texttugrik),
+%   \cs{texttenge} (\texttenge),
+%   \cs{textlira} (\textlira),\\
+%   \cs{textruble} (\textruble).
+% \end{function}
+%
+% \end{documentation}
+% \clearpage
+%
+% \begin{implementation}
+%
+% \section{Implementation}
+% \label{sec:impl}
+%
+%\subsection{Setting up}
+%\label{sec:settingup}
+%
+% First, we declare who we are:
+%    \begin{macrocode}
+%<@@=lora>
+%<*package>
+\ProvidesExplPackage {lora}
+{2026-09-09} {v0.1}
+{Lora font by Olga Karpushina and Alexei Vanyashin}
+%    \end{macrocode}
+%
+%\subsection{Options}
+%\label{sec:options}
+%
+% \begin{variable}{
+%   default,
+%   scale,
+%   Scale,
+%   \l_@@_default_bool,
+%   \l_@@_scale_tl,
+% }
+%    \begin{macrocode}
+\keys_define:nn {lora}
+
+{
+  default .bool_set:N = \l__lora_default_bool,
+  default .default:n = true,
+  scale .tl_set:N = \l__lora_scale_tl,
+  Scale .tl_set:N = \l__lora_scale_tl,
+}
+
+\keys_set:nn { lora }
+{
+  default=true,
+  scale = 1.0,
+}
+%    \end{macrocode}
+% \end{variable}
+%
+% Processing options
+%    \begin{macrocode}
+\IfFormatAtLeastTF { 2022-06-01 }
+  { \ProcessKeyOptions [ lora ] }
+  {
+    \RequirePackage { l3keys2e }
+    \ProcessKeysOptions { lora }
+  }
+%    \end{macrocode}
+%
+%\subsection{Setting up font}
+%\label{sec:font}
+%
+%    \begin{macrocode}
+\RequirePackage{fontspec}
+
+\defaultfontfeatures{Ligatures=TeX, RawFeature={+axis={wght=400}}}
+
+\newfontfamily\lorafamily{Lora}
+[
+  NFSSFamily=lora,
+  Ligatures=TeX,
+  Scale=\l__lora_scale_tl,
+  Extension = .ttf,
+  ItalicFont         = Lora-Italic,
+  BoldFont           = Lora,
+  BoldItalicFont     = Lora-Italic,
+  BoldFeatures       = {RawFeature={+axis={wght=700}}},
+  BoldItalicFeatures = {RawFeature={+axis={wght=700}}}
+]
+
+\newfontfamily\LoraMedium{Lora}[
+  Extension = .ttf,
+  UprightFeatures    = {RawFeature={+axis={wght=500}}},
+  ItalicFeatures     = {RawFeature={+axis={wght=500}}},
+  ItalicFont         = Lora-Italic,
+  BoldFont           = Lora,
+  BoldItalicFont     = Lora-Italic,
+  BoldFeatures       = {RawFeature={+axis={wght=700}}},
+  BoldItalicFeatures = {RawFeature={+axis={wght=700}}}
+]
+
+\newfontfamily\LoraSemiBold{Lora}[
+  Extension = .ttf,
+  UprightFeatures    = {RawFeature={+axis={wght=600}}},
+  ItalicFeatures     = {RawFeature={+axis={wght=600}}},
+  ItalicFont         = Lora-Italic,
+  BoldFont           = Lora,
+  BoldItalicFont     = Lora-Italic,
+  BoldFeatures       = {RawFeature={+axis={wght=700}}},
+  BoldItalicFeatures = {RawFeature={+axis={wght=700}}}
+]
+%    \end{macrocode}
+%
+% Checking whether we want the font to be default
+%    \begin{macrocode}
+\bool_if:NT \l__lora_default_bool
+{
+  \setmainfont{lora}
+  \renewcommand\rmdefault{lora}
+}
+%    \end{macrocode}
+%
+% \begin{macro}{\textlora, \textloramed, \textlorasb}
+%    \begin{macrocode}
+\DeclareTextFontCommand{\textlora}{\lorafamily}
+\DeclareTextFontCommand{\textloramed}{\LoraMedium}
+\DeclareTextFontCommand{\textlorasb}{\LoraSemiBold}
+%    \end{macrocode}
+% \end{macro}
+%
+% Special characters, absent in the default
+% \begin{macro}{
+%   \texthryvnia,
+%   \texttugrik,
+%   \texttenge,
+%   \textlira,
+%   \textruble
+% }
+% Currency symbols
+%    \begin{macrocode}
+\DeclareUnicodeSymbol{\texthryvnia}       {"20B4}
+\DeclareUnicodeSymbol{\texttugrik}        {"20AE}
+\DeclareUnicodeSymbol{\texttenge}         {"20B8}
+\DeclareUnicodeSymbol{\textlira}          {"20BA}
+\DeclareUnicodeSymbol{\textruble}         {"20BD}
+%    \end{macrocode}
+%   
+% \end{macro}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+% \end{implementation}
+%
+% \nocite{*}
+% \printbibliography
+%
+%
+%
+% \PrintIndex
+% \PrintChanges
