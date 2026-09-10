@@ -1,5 +1,7 @@
 LaTeX support for Lora font by Olga Karpushina and Alexei Vanyashin
+
 Author: Dmitriy Nosachev, [quartz64@gmail.com](mailto:quartz64@gmail.com) 
+
 Copyright: Dmitriy Nosachev, 2026. License: LPPL 1.3c (LaTeX files)
 
 # About the font
