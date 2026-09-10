@@ -160,7 +160,7 @@
 %<@@=lora>
 %<*package>
 \ProvidesExplPackage {lora}
-{2026-09-09} {v0.1}
+{2026-09-10} {v1.0}
 {Lora font by Olga Karpushina and Alexei Vanyashin}
 %    \end{macrocode}
 %
@@ -209,38 +209,40 @@
 \RequirePackage{fontspec}
 
 \defaultfontfeatures{Ligatures=TeX, RawFeature={+axis={wght=400}}}
-
-\newfontfamily\lorafamily{Lora}
+%    \end{macrocode}
+% \changes{v1.0.0}{2026/09/10}{Switched to the original font filenames (Lora[wght].ttf, Lora-Italic[wght].ttf).}
+%    \begin{macrocode}
+\newfontfamily\lorafamily{Lora[wght]}
 [
-  NFSSFamily=lora,
-  Ligatures=TeX,
-  Scale=\l__lora_scale_tl,
-  Extension = .ttf,
-  ItalicFont         = Lora-Italic,
-  BoldFont           = Lora,
-  BoldItalicFont     = Lora-Italic,
+  NFSSFamily         = lora,
+  Ligatures          = TeX,
+  Scale              = \l__lora_scale_tl,
+  Extension          = .ttf,
+  ItalicFont         = Lora-Italic[wght],
+  BoldFont           = Lora[wght],
+  BoldItalicFont     = Lora-Italic[wght],
   BoldFeatures       = {RawFeature={+axis={wght=700}}},
   BoldItalicFeatures = {RawFeature={+axis={wght=700}}}
 ]
 
-\newfontfamily\LoraMedium{Lora}[
-  Extension = .ttf,
+\newfontfamily\LoraMedium{Lora[wght]}[
+  Extension          = .ttf,
   UprightFeatures    = {RawFeature={+axis={wght=500}}},
   ItalicFeatures     = {RawFeature={+axis={wght=500}}},
-  ItalicFont         = Lora-Italic,
-  BoldFont           = Lora,
-  BoldItalicFont     = Lora-Italic,
+  ItalicFont         = Lora-Italic[wght],
+  BoldFont           = Lora[wght],
+  BoldItalicFont     = Lora-Italic[wght],
   BoldFeatures       = {RawFeature={+axis={wght=700}}},
   BoldItalicFeatures = {RawFeature={+axis={wght=700}}}
 ]
 
-\newfontfamily\LoraSemiBold{Lora}[
-  Extension = .ttf,
+\newfontfamily\LoraSemiBold{Lora[wght]}[
+  Extension          = .ttf,
   UprightFeatures    = {RawFeature={+axis={wght=600}}},
   ItalicFeatures     = {RawFeature={+axis={wght=600}}},
-  ItalicFont         = Lora-Italic,
-  BoldFont           = Lora,
-  BoldItalicFont     = Lora-Italic,
+  ItalicFont         = Lora-Italic[wght],
+  BoldFont           = Lora[wght],
+  BoldItalicFont     = Lora-Italic[wght],
   BoldFeatures       = {RawFeature={+axis={wght=700}}},
   BoldItalicFeatures = {RawFeature={+axis={wght=700}}}
 ]
