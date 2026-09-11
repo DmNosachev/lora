@@ -100,10 +100,15 @@
 % \textbf{bold} and \textbf{\itshape bold italic}. They are selected
 % by the standard \LaTeX{} commands. 
 % 
-% This font supports variable weight with values from 400 to 700.
-% The regular weight corresponds to 400, and the bold corresponds to 700.
-% Additionally, the package provides commands for medium weight (500)
-% and semi-bold (600).
+% The font supports variable weight with values from 400 to 700.
+% The font contains four named instances corresponding to different
+% values of the weight axis:
+% \begin{itemize}
+%   \item Regular (\texttt{wght=400})
+%   \item Medium (\texttt{wght=500})
+%   \item SemiBold (\texttt{wght=600})
+%   \item Bold (\texttt{wght=700})
+% \end{itemize}
 % 
 % \begin{function}{\LoraMedium, \textloramed}
 %   \begin{syntax}
@@ -122,8 +127,31 @@
 %   The font provides the commands \cs{LoraSemiBold} and
 %   \cs{textlorasb} for selecting the \textlorasb{semi-bold} variant.
 % \end{function}
+% 
+%\subsection{Defining a font with custom weight}
+%\label{sec:custweight}
+% 
+% You can use any intermediate weight value between 400 and 700.
+% In the example below, we define a new font family
+% (and the corresponding text command) with a weight value
+% of 450 for the regular font and a standard bold style.
+% 
+% \begin{verbatim}
+% \newfontfamily\LoraSpecial{Lora[wght]}[
+%   Extension          = .ttf,
+%   UprightFeatures    = {RawFeature={+axis={wght=450}}},
+%   ItalicFeatures     = {RawFeature={+axis={wght=450}}},
+%   ItalicFont         = Lora-Italic[wght],
+%   BoldFont           = Lora[wght],
+%   BoldItalicFont     = Lora-Italic[wght],
+%   BoldFeatures       = {RawFeature={instance={Bold}}},
+%   BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
+% ]
+% 
+% \DeclareTextFontCommand{\textloraspc}{\LoraSpecial}
+% \end{verbatim}
 %
-%\subsection{Special symbols in text}
+%\subsection{Special symbols}
 %\label{sec:chars}
 %
 % \begin{function}{
@@ -160,7 +188,7 @@
 %<@@=lora>
 %<*package>
 \ProvidesExplPackage {lora}
-{2026-09-10} {v1.0.0}
+{2026-09-11} {v1.0.1}
 {Lora font by Olga Karpushina and Alexei Vanyashin}
 %    \end{macrocode}
 %
@@ -208,9 +236,10 @@
 %    \begin{macrocode}
 \RequirePackage{fontspec}
 
-\defaultfontfeatures{Ligatures=TeX, RawFeature={+axis={wght=400}}}
+\defaultfontfeatures{Ligatures=TeX, RawFeature={instance={Regular}}}
 %    \end{macrocode}
 % \changes{v1.0.0}{2026/09/10}{Switched to the original font filenames (Lora[wght].ttf, Lora-Italic[wght].ttf).}
+% \changes{v1.0.0}{2026/09/10}{Using named instances of fonts instead of manually setting axis values.}
 %    \begin{macrocode}
 \newfontfamily\lorafamily{Lora[wght]}
 [
@@ -219,41 +248,42 @@
   Scale              = \l__lora_scale_tl,
   Extension          = .ttf,
   ItalicFont         = Lora-Italic[wght],
+  ItalicFeatures     = {RawFeature={instance={Regular Italic}}},
   BoldFont           = Lora[wght],
   BoldItalicFont     = Lora-Italic[wght],
-  BoldFeatures       = {RawFeature={+axis={wght=700}}},
-  BoldItalicFeatures = {RawFeature={+axis={wght=700}}}
+  BoldFeatures       = {RawFeature={instance={Bold}}},
+  BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
 ]
 
 \newfontfamily\LoraMedium{Lora[wght]}[
   Extension          = .ttf,
-  UprightFeatures    = {RawFeature={+axis={wght=500}}},
-  ItalicFeatures     = {RawFeature={+axis={wght=500}}},
+  UprightFeatures    = {RawFeature={instance={Medium}}},
   ItalicFont         = Lora-Italic[wght],
+  ItalicFeatures     = {RawFeature={instance={Medium Italic}}},
   BoldFont           = Lora[wght],
   BoldItalicFont     = Lora-Italic[wght],
-  BoldFeatures       = {RawFeature={+axis={wght=700}}},
-  BoldItalicFeatures = {RawFeature={+axis={wght=700}}}
+  BoldFeatures       = {RawFeature={instance={Bold}}},
+  BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
 ]
 
 \newfontfamily\LoraSemiBold{Lora[wght]}[
   Extension          = .ttf,
-  UprightFeatures    = {RawFeature={+axis={wght=600}}},
-  ItalicFeatures     = {RawFeature={+axis={wght=600}}},
+  UprightFeatures    = {RawFeature={instance={SemiBold}}},
   ItalicFont         = Lora-Italic[wght],
+  ItalicFeatures     = {RawFeature={instance={SemiBold Italic}}},
   BoldFont           = Lora[wght],
   BoldItalicFont     = Lora-Italic[wght],
-  BoldFeatures       = {RawFeature={+axis={wght=700}}},
-  BoldItalicFeatures = {RawFeature={+axis={wght=700}}}
+  BoldFeatures       = {RawFeature={instance={Bold}}},
+  BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
 ]
 %    \end{macrocode}
 %
 % Checking whether we want the font to be default
+% \changes{v1.0.1}{2026/09/11}{Removed setting of \texttt{\textbackslash{}rmdefault} as it is redundant.}
 %    \begin{macrocode}
 \bool_if:NT \l__lora_default_bool
 {
   \setmainfont{lora}
-  \renewcommand\rmdefault{lora}
 }
 %    \end{macrocode}
 %

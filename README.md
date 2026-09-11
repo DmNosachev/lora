@@ -34,13 +34,24 @@ git submodule update --init --recursive
 
 # Changelog
 
+## [1.0.1] - 2026-09-11
+
+### Added
+- Example of defining a font with a custom weight value.
+
+### Changed
+
+- Removed setting of `\rmdefault` as it is redundant for serif font.
+
 ## [1.0.0] - 2026-09-10
 
 ### Changed
 
-- Switched to a more meaningful `l3build` instead of `make`
+- Switched to a more appropriate `l3build` instead of `make`
 
 - Switched to the original font filenames (Lora[wght].ttf, Lora-Italic[wght].ttf)
+
+- Using named instances of fonts instead of manually setting axis values.
 
 ## [0.1] - 2026-09-09
 - The first release version.
