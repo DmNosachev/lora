@@ -244,7 +244,6 @@
 \newfontfamily\lorafamily{Lora[wght]}
 [
   NFSSFamily         = lora,
-  Ligatures          = TeX,
   Scale              = \l__lora_scale_tl,
   Extension          = .ttf,
   ItalicFont         = Lora-Italic[wght],
@@ -279,7 +278,7 @@
 %    \end{macrocode}
 %
 % Checking whether we want the font to be default
-% \changes{v1.0.1}{2026/09/11}{Removed setting of \texttt{\textbackslash{}rmdefault} as it is redundant.}
+% \changes{v1.0.1}{2026/09/11}{Removed setting of \texttt{\textbackslash{}rmdefault} as it is redundant for serif font.}
 %    \begin{macrocode}
 \bool_if:NT \l__lora_default_bool
 {
