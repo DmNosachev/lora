@@ -34,6 +34,12 @@ git submodule update --init --recursive
 
 # Changelog
 
+## [1.0.2] - 2026-09-15
+
+### Changed
+- Added `lora.fontspec` file for `\setmainfont`.
+- Separate settings for `\setmainfont` and `\rmdefault`.
+
 ## [1.0.1] - 2026-09-11
 
 ### Added
@@ -41,15 +47,13 @@ git submodule update --init --recursive
 
 ### Changed
 
-- Removed setting of `\rmdefault` as it is redundant for serif font.
+- Apply scale setting to all Lora variants.
 
 ## [1.0.0] - 2026-09-10
 
 ### Changed
 
-- Switched to a more appropriate `l3build` instead of `make`
-
-- Switched to the original font filenames (Lora[wght].ttf, Lora-Italic[wght].ttf)
+- Switched to a more convenient `l3build` instead of `make`.
 
 - Using named instances of fonts instead of manually setting axis values.
 

@@ -70,12 +70,18 @@
 %\subsection{Package options}
 %\label{sec:ug-options}
 %
-% \begin{variable}{default, scale, Scale}
+% \begin{variable}{default, rmdefault, scale, Scale}
 %
 % The following options are recognized:
 %   \begin{description}
 %   \item[default] whether to make Lora the main font of the
 %     document, either |true| (the default) or |false|.
+%    This option uses the \cs{setmainfont} macro, which utilizes
+%    font settings from the \texttt{lora.fontspec} file.
+%   \item[rmdefault] whether to make Lora the sans serif font of your
+%     document, either |true| or |false| (the default).
+%    This option is needed if you are using a sans-serif font
+%    as the primary font.
 %   \item[scale] the scale for the font, by default 1.0.  The option
 %   |Scale| is a synonym.
 %   \end{description}
@@ -101,7 +107,8 @@
 % by the standard \LaTeX{} commands. 
 % 
 % The font supports variable weight with values from 400 to 700.
-% The font contains four named instances corresponding to different
+% Each font file, |Lora.ttf| and |Lora-Italic.ttf|, contains four four
+% named instances corresponding to different
 % values of the weight axis:
 % \begin{itemize}
 %   \item Regular (\texttt{wght=400})
@@ -137,13 +144,12 @@
 % of 450 for the regular font and a standard bold style.
 % 
 % \begin{verbatim}
-% \newfontfamily\LoraSpecial{Lora[wght]}[
-%   Extension          = .ttf,
+% \newfontfamily\LoraSpecial{Lora}[
 %   UprightFeatures    = {RawFeature={+axis={wght=450}}},
 %   ItalicFeatures     = {RawFeature={+axis={wght=450}}},
-%   ItalicFont         = Lora-Italic[wght],
-%   BoldFont           = Lora[wght],
-%   BoldItalicFont     = Lora-Italic[wght],
+%   ItalicFont         = Lora-Italic,
+%   BoldFont           = Lora,
+%   BoldItalicFont     = Lora-Italic,
 %   BoldFeatures       = {RawFeature={instance={Bold}}},
 %   BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
 % ]
@@ -165,11 +171,13 @@
 % (\textdollar), \cs{textyen} (\textyen), \cs{textsterling}
 % (\textsterling), \cs{texteuro} (\texteuro).  It also defines several
 % less common currency characters:
-%   \cs{texthryvnia} (\texthryvnia),
-%   \cs{texttugrik} (\texttugrik),
-%   \cs{texttenge} (\texttenge),
-%   \cs{textlira} (\textlira),\\
-%   \cs{textruble} (\textruble).
+% \begin{trivlist}
+%   \item \cs{texthryvnia} (\texthryvnia),
+%   \item \cs{texttugrik} (\texttugrik),
+%   \item \cs{texttenge} (\texttenge),
+%   \item \cs{textlira} (\textlira),\\
+%   \item \cs{textruble} (\textruble).
+% \end{trivlist}
 % \end{function}
 %
 % \end{documentation}
@@ -188,7 +196,7 @@
 %<@@=lora>
 %<*package>
 \ProvidesExplPackage {lora}
-{2026-09-11} {v1.0.1}
+{2026-09-15} {v1.0.2}
 {Lora font by Olga Karpushina and Alexei Vanyashin}
 %    \end{macrocode}
 %
@@ -197,24 +205,29 @@
 %
 % \begin{variable}{
 %   default,
+%   rmdefault,
 %   scale,
 %   Scale,
 %   \l_@@_default_bool,
-%   \l_@@_scale_tl,
+%   \l_@@_rmdefault_bool,
+%   \l_@@_scale_tl
 % }
 %    \begin{macrocode}
 \keys_define:nn {lora}
 
 {
-  default .bool_set:N = \l__lora_default_bool,
+  default .bool_set:N = \l_@@_default_bool,
   default .default:n = true,
-  scale .tl_set:N = \l__lora_scale_tl,
-  Scale .tl_set:N = \l__lora_scale_tl,
+  rmdefault .bool_set:N = \l_@@_rmdefault_bool,
+  rmdefault .default:n = true,
+  scale .tl_set:N = \l_@@_scale_tl,
+  Scale .tl_set:N = \l_@@_scale_tl,
 }
 
 \keys_set:nn { lora }
 {
   default=true,
+  rmdefault=false,
   scale = 1.0,
 }
 %    \end{macrocode}
@@ -236,53 +249,65 @@
 %    \begin{macrocode}
 \RequirePackage{fontspec}
 
-\defaultfontfeatures{Ligatures=TeX, RawFeature={instance={Regular}}}
+\defaultfontfeatures[Lora]{
+  Extension = .ttf,
+  Ligatures = TeX,
+  Scale     = \l_@@_scale_tl
+}
 %    \end{macrocode}
-% \changes{v1.0.0}{2026/09/10}{Switched to the original font filenames (Lora[wght].ttf, Lora-Italic[wght].ttf).}
+% \changes{v1.0.1}{2026/09/11}{Apply scale setting to all Lora variants.}
 % \changes{v1.0.0}{2026/09/10}{Using named instances of fonts instead of manually setting axis values.}
 %    \begin{macrocode}
-\newfontfamily\lorafamily{Lora[wght]}
+\newfontfamily\lorafamily{Lora}
 [
   NFSSFamily         = lora,
-  Scale              = \l__lora_scale_tl,
-  Extension          = .ttf,
-  ItalicFont         = Lora-Italic[wght],
+  UprightFont        = Lora,
+  UprightFeatures    = {RawFeature={instance={Regular}}},
+  ItalicFont         = Lora-Italic,
   ItalicFeatures     = {RawFeature={instance={Regular Italic}}},
-  BoldFont           = Lora[wght],
-  BoldItalicFont     = Lora-Italic[wght],
+  BoldFont           = Lora,
+  BoldItalicFont     = Lora-Italic,
   BoldFeatures       = {RawFeature={instance={Bold}}},
   BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
 ]
 
-\newfontfamily\LoraMedium{Lora[wght]}[
-  Extension          = .ttf,
+\newfontfamily\LoraMedium{Lora}[
+  NFSSFamily         = loram,
+  UprightFont        = Lora,
   UprightFeatures    = {RawFeature={instance={Medium}}},
-  ItalicFont         = Lora-Italic[wght],
+  ItalicFont         = Lora-Italic,
   ItalicFeatures     = {RawFeature={instance={Medium Italic}}},
-  BoldFont           = Lora[wght],
-  BoldItalicFont     = Lora-Italic[wght],
+  BoldFont           = Lora,
+  BoldItalicFont     = Lora-Italic,
   BoldFeatures       = {RawFeature={instance={Bold}}},
   BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
 ]
 
-\newfontfamily\LoraSemiBold{Lora[wght]}[
-  Extension          = .ttf,
+\newfontfamily\LoraSemiBold{Lora}[
+  NFSSFamily         = lorasb,
+  UprightFont        = Lora,
   UprightFeatures    = {RawFeature={instance={SemiBold}}},
-  ItalicFont         = Lora-Italic[wght],
+  ItalicFont         = Lora-Italic,
   ItalicFeatures     = {RawFeature={instance={SemiBold Italic}}},
-  BoldFont           = Lora[wght],
-  BoldItalicFont     = Lora-Italic[wght],
+  BoldFont           = Lora,
+  BoldItalicFont     = Lora-Italic,
   BoldFeatures       = {RawFeature={instance={Bold}}},
   BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
 ]
 %    \end{macrocode}
 %
 % Checking whether we want the font to be default
-% \changes{v1.0.1}{2026/09/11}{Removed setting of \texttt{\textbackslash{}rmdefault} as it is redundant for serif font.}
+% \changes{v1.0.2}{2026/09/15}{Added \texttt{lora.fontspec} file for \cs{setmainfont}.}
+% \changes{v1.0.2}{2026/09/15}{Separate settings for \cs{setmainfont} and \cs{rmdefault}.}
 %    \begin{macrocode}
-\bool_if:NT \l__lora_default_bool
+\bool_if:NT \l_@@_default_bool
 {
   \setmainfont{lora}
+}
+
+\bool_if:NT \l_@@_rmdefault_bool
+{
+  \renewcommand{\rmdefault}{lora}
 }
 %    \end{macrocode}
 %

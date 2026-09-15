@@ -1,0 +1,14 @@
+\defaultfontfeatures[lora]
+{
+  Extension          = .ttf,
+  Ligatures          = TeX,
+  Scale              = \l__lora_scale_tl,
+  UprightFont        = Lora,
+  UprightFeatures    = {RawFeature={instance={Regular}}},
+  ItalicFont         = Lora-Italic,
+  ItalicFeatures     = {RawFeature={instance={Regular Italic}}},
+  BoldFont           = Lora,
+  BoldItalicFont     = Lora-Italic,
+  BoldFeatures       = {RawFeature={instance={Bold}}},
+  BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
+}
