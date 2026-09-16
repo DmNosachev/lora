@@ -34,6 +34,10 @@ git submodule update --init --recursive
 
 # Changelog
 
+## [1.0.3] - 2026-09-16
+
+- Formatting: fixed `Missing stylistic whitespaces [S204]` warnings from explcheck.
+
 ## [1.0.2] - 2026-09-15
 
 ### Changed

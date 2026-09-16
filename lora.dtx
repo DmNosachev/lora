@@ -32,7 +32,7 @@
 % \GetFileInfo{lora.sty}
 % \title{\pkg{lora}---\LaTeX{} support of Lora font\\ by Olga Karpushina and Alexei Vanyashin}
 % \date{\fileversion, \filedate}
-% \author{Dmitriy Nosachev\thanks{\href{mailto:quartz64@gmail.com}{quartz64@gmail.com}}}
+% \author{Dmitriy Nosachev\thanks{\href{mailto:quartz64@gmail.com}{quartz64@gmail.com } } }
 % \maketitle
 % \begin{abstract}
 %   Lora is a well-balanced contemporary serif typeface with roots in calligraphy, featuring brushed curves and driving wedge serifs.
@@ -145,13 +145,13 @@
 % 
 % \begin{verbatim}
 % \newfontfamily\LoraSpecial{Lora}[
-%   UprightFeatures    = {RawFeature={+axis={wght=450}}},
-%   ItalicFeatures     = {RawFeature={+axis={wght=450}}},
+%   UprightFeatures    = { RawFeature = {+axis={wght=450 } } },
+%   ItalicFeatures     = { RawFeature = {+axis={wght=450 } } },
 %   ItalicFont         = Lora-Italic,
 %   BoldFont           = Lora,
 %   BoldItalicFont     = Lora-Italic,
-%   BoldFeatures       = {RawFeature={instance={Bold}}},
-%   BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
+%   BoldFeatures       = { RawFeature = { instance = { Bold } } },
+%   BoldItalicFeatures = { RawFeature = { instance = { Bold Italic } } }
 % ]
 % 
 % \DeclareTextFontCommand{\textloraspc}{\LoraSpecial}
@@ -196,7 +196,7 @@
 %<@@=lora>
 %<*package>
 \ProvidesExplPackage {lora}
-{2026-09-15} {v1.0.2}
+{2026-09-16} {v1.0.3}
 {Lora font by Olga Karpushina and Alexei Vanyashin}
 %    \end{macrocode}
 %
@@ -213,8 +213,7 @@
 %   \l_@@_scale_tl
 % }
 %    \begin{macrocode}
-\keys_define:nn {lora}
-
+\keys_define:nn { lora }
 {
   default .bool_set:N = \l_@@_default_bool,
   default .default:n = true,
@@ -247,9 +246,10 @@
 %\label{sec:font}
 %
 %    \begin{macrocode}
-\RequirePackage{fontspec}
+\RequirePackage{ fontspec }
 
-\defaultfontfeatures[Lora]{
+\defaultfontfeatures[ Lora ]
+{
   Extension = .ttf,
   Ligatures = TeX,
   Scale     = \l_@@_scale_tl
@@ -258,41 +258,43 @@
 % \changes{v1.0.1}{2026/09/11}{Apply scale setting to all Lora variants.}
 % \changes{v1.0.0}{2026/09/10}{Using named instances of fonts instead of manually setting axis values.}
 %    \begin{macrocode}
-\newfontfamily\lorafamily{Lora}
+\newfontfamily\lorafamily{ Lora }
 [
   NFSSFamily         = lora,
   UprightFont        = Lora,
-  UprightFeatures    = {RawFeature={instance={Regular}}},
+  UprightFeatures    = { RawFeature = { instance = { Regular } } },
   ItalicFont         = Lora-Italic,
-  ItalicFeatures     = {RawFeature={instance={Regular Italic}}},
+  ItalicFeatures     = { RawFeature = { instance = { Regular Italic } } },
   BoldFont           = Lora,
   BoldItalicFont     = Lora-Italic,
-  BoldFeatures       = {RawFeature={instance={Bold}}},
-  BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
+  BoldFeatures       = { RawFeature = { instance = { Bold } } },
+  BoldItalicFeatures = { RawFeature = { instance = { Bold Italic } } }
 ]
 
-\newfontfamily\LoraMedium{Lora}[
+\newfontfamily\LoraMedium{ Lora }
+[
   NFSSFamily         = loram,
   UprightFont        = Lora,
-  UprightFeatures    = {RawFeature={instance={Medium}}},
+  UprightFeatures    = { RawFeature = { instance = { Medium } } },
   ItalicFont         = Lora-Italic,
-  ItalicFeatures     = {RawFeature={instance={Medium Italic}}},
+  ItalicFeatures     = { RawFeature = { instance = { Medium Italic } } },
   BoldFont           = Lora,
   BoldItalicFont     = Lora-Italic,
-  BoldFeatures       = {RawFeature={instance={Bold}}},
-  BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
+  BoldFeatures       = { RawFeature = { instance = { Bold } } },
+  BoldItalicFeatures = { RawFeature = { instance = { Bold Italic } } }
 ]
 
-\newfontfamily\LoraSemiBold{Lora}[
+\newfontfamily\LoraSemiBold{ Lora }
+[
   NFSSFamily         = lorasb,
   UprightFont        = Lora,
-  UprightFeatures    = {RawFeature={instance={SemiBold}}},
+  UprightFeatures    = { RawFeature = { instance = { SemiBold } } },
   ItalicFont         = Lora-Italic,
-  ItalicFeatures     = {RawFeature={instance={SemiBold Italic}}},
+  ItalicFeatures     = { RawFeature = { instance = { SemiBold Italic } } },
   BoldFont           = Lora,
   BoldItalicFont     = Lora-Italic,
-  BoldFeatures       = {RawFeature={instance={Bold}}},
-  BoldItalicFeatures = {RawFeature={instance={Bold Italic}}}
+  BoldFeatures       = { RawFeature = { instance = { Bold } } },
+  BoldItalicFeatures = { RawFeature = { instance = { Bold Italic } } }
 ]
 %    \end{macrocode}
 %
@@ -302,20 +304,20 @@
 %    \begin{macrocode}
 \bool_if:NT \l_@@_default_bool
 {
-  \setmainfont{lora}
+  \setmainfont{ lora }
 }
 
 \bool_if:NT \l_@@_rmdefault_bool
 {
-  \renewcommand{\rmdefault}{lora}
+  \renewcommand{ \rmdefault } { lora }
 }
 %    \end{macrocode}
 %
 % \begin{macro}{\textlora, \textloramed, \textlorasb}
 %    \begin{macrocode}
-\DeclareTextFontCommand{\textlora}{\lorafamily}
-\DeclareTextFontCommand{\textloramed}{\LoraMedium}
-\DeclareTextFontCommand{\textlorasb}{\LoraSemiBold}
+\DeclareTextFontCommand{ \textlora } { \lorafamily }
+\DeclareTextFontCommand{ \textloramed } { \LoraMedium }
+\DeclareTextFontCommand{ \textlorasb } { \LoraSemiBold }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -329,11 +331,11 @@
 % }
 % Currency symbols
 %    \begin{macrocode}
-\DeclareUnicodeSymbol{\texthryvnia}       {"20B4}
-\DeclareUnicodeSymbol{\texttugrik}        {"20AE}
-\DeclareUnicodeSymbol{\texttenge}         {"20B8}
-\DeclareUnicodeSymbol{\textlira}          {"20BA}
-\DeclareUnicodeSymbol{\textruble}         {"20BD}
+\DeclareUnicodeSymbol{ \texthryvnia }       { "20B4 }
+\DeclareUnicodeSymbol{ \texttugrik }        { "20AE }
+\DeclareUnicodeSymbol{ \texttenge }         { "20B8 }
+\DeclareUnicodeSymbol{ \textlira }          { "20BA }
+\DeclareUnicodeSymbol{ \textruble }         { "20BD }
 %    \end{macrocode}
 %   
 % \end{macro}
